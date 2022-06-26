@@ -38,9 +38,16 @@ static void _send_button_pushed_message(void)
 static void main_task(void *pvParameters)
 {
     uint32_t u32Notification = 0;
-    while (!ubt_network_ready())
+    if (!ubt_network_ready())
     {
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        while (!(u32Notification & (1 << NOTIFICATION_NETWORK_UP)))
+        {
+            xTaskNotifyWait(0, ULONG_MAX, &u32Notification, portMAX_DELAY);
+        }
+    }
+    else
+    {
+        ESP_LOGI(TAG, "Connection is already up");
     }
 
     ESP_LOGI(TAG, "Buzzer ready");
@@ -51,7 +58,7 @@ static void main_task(void *pvParameters)
             continue;
         }
         ESP_LOGW(TAG, "New notification (%d)", u32Notification);
-        if (u32Notification & (1<<NOTIFICATION_BUTTON_EVENT))
+        if (u32Notification & (1 << NOTIFICATION_BUTTON_EVENT))
         {
             _send_button_pushed_message();
         }
