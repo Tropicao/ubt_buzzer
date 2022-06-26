@@ -14,7 +14,6 @@
 #define WS_SERVER_IP "192.168.1.1"
 #define WS_SERVER_PORT 8080
 
-static bool bReady = false;
 esp_websocket_client_handle_t ws_client = NULL;
 
 static void _websocket_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
@@ -24,13 +23,11 @@ static void _websocket_event_handler(void *handler_args, esp_event_base_t base, 
     {
     case WEBSOCKET_EVENT_CONNECTED:
         ESP_LOGI(TAG, "WEBSOCKET_EVENT_CONNECTED");
-        bReady = true;
         xTaskNotify(xAppTask, 1 << NOTIFICATION_NETWORK_UP, eSetBits);
         break;
     case WEBSOCKET_EVENT_DISCONNECTED:
         ESP_LOGI(TAG, "WEBSOCKET_EVENT_DISCONNECTED");
         xTaskNotify(xAppTask, 1 << NOTIFICATION_NETWORK_DOWN, eSetBits);
-        bReady = false;
         break;
     case WEBSOCKET_EVENT_DATA:
         ESP_LOGI(TAG, "WEBSOCKET_EVENT_DATA");
@@ -125,11 +122,6 @@ void ubt_network_start(void)
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_start());
-}
-
-bool ubt_network_ready(void)
-{
-    return bReady;
 }
 
 void ubt_network_sendmessage(char *pcMessage)

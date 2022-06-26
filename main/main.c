@@ -55,18 +55,6 @@ static void _send_identify_message(void)
 static void main_task(void *pvParameters)
 {
     uint32_t u32Notification = 0;
-    if (!ubt_network_ready())
-    {
-        while (!(u32Notification & (1 << NOTIFICATION_NETWORK_UP)))
-        {
-            xTaskNotifyWait(0, ULONG_MAX, &u32Notification, portMAX_DELAY);
-        }
-    }
-    else
-    {
-        ESP_LOGI(TAG, "Connection is already up");
-    }
-
     ESP_LOGI(TAG, "Buzzer ready");
     _send_identify_message();
     while (true)
@@ -78,10 +66,12 @@ static void main_task(void *pvParameters)
         ESP_LOGD(TAG, "New notification (%d)", u32Notification);
         if (u32Notification & (1 << NOTIFICATION_BUTTON_EVENT))
         {
+            ESP_LOGI(TAG, "Button pushed, send notification to server");
             _send_button_pushed_message();
         }
-        else if(u32Notification & (1 << NOTIFICATION_NETWORK_UP))
+        else if (u32Notification & (1 << NOTIFICATION_NETWORK_UP))
         {
+            ESP_LOGI(TAG, "Connected to server, send identification");
             _send_identify_message();
         }
     }
@@ -89,6 +79,7 @@ static void main_task(void *pvParameters)
 
 void app_main(void)
 {
+    esp_log_level_set(TAG, ESP_LOG_DEBUG);
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     xTaskCreate(&main_task, "main_task", 4096, NULL, 5, &xAppTask);
     ubt_network_start();
