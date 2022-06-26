@@ -5,7 +5,7 @@
 #include "common.h"
 
 #define TAG "BUTTON"
-#define BUTTON_GPIO 12
+#define BUTTON_GPIO 14
 #define BUTTON_PIN_MASK 1 << BUTTON_GPIO
 
 static void IRAM_ATTR gpio_isr_handler(void *arg)
