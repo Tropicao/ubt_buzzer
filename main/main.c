@@ -80,6 +80,10 @@ static void main_task(void *pvParameters)
         {
             _send_button_pushed_message();
         }
+        else if(u32Notification & (1 << NOTIFICATION_NETWORK_UP))
+        {
+            _send_identify_message();
+        }
     }
 }
 
