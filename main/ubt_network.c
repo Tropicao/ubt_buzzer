@@ -95,6 +95,8 @@ static void _configure_nvs()
 
 void ubt_network_start(void)
 {
+    esp_log_level_set(TAG, ESP_LOG_DEBUG);
+
     _configure_nvs();
 
     ESP_ERROR_CHECK(esp_netif_init());

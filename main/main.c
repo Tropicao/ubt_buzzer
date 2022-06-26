@@ -75,7 +75,7 @@ static void main_task(void *pvParameters)
         {
             continue;
         }
-        ESP_LOGW(TAG, "New notification (%d)", u32Notification);
+        ESP_LOGD(TAG, "New notification (%d)", u32Notification);
         if (u32Notification & (1 << NOTIFICATION_BUTTON_EVENT))
         {
             _send_button_pushed_message();

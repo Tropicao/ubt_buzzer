@@ -15,6 +15,7 @@ static void IRAM_ATTR gpio_isr_handler(void *arg)
 
 void ubt_button_start()
 {
+    esp_log_level_set(TAG, ESP_LOG_DEBUG);
     ESP_LOGI(TAG, "Configuring button GPIO");
     gpio_config_t config = {
         .pin_bit_mask = BUTTON_PIN_MASK,
