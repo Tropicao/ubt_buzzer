@@ -14,3 +14,9 @@ The buzzer relies on ESP32 with a button connected to it. The buzzer must connec
 * plug the buzzer to computer with an USB cable
 * use `idf.py flash` to reflash the buzzer
 * advanced user : you can use `idf.py monitor` to manage both previous steps and get device logs
+
+## IDE configuration
+The project has a basic Visual Studio code configuration, enable to Vscode "tasks" :
+* build
+* flash
+Moreover, Intellisense is able to resolve ESP IDF symbols if your ESP IDF SK is at the same level than the project. You can edit ESP IDF path in `.vscode/c_cpp_properties.json` if you want to set another path.
