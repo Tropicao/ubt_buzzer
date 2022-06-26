@@ -24,6 +24,7 @@ static void main_task(void *pvParameters)
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 
+    ESP_LOGI(TAG, "Buzzer ready");
     while (true)
     {
         if (xTaskNotifyWait(0, ULONG_MAX, &u32Notification, portMAX_DELAY) == pdTRUE)
