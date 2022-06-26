@@ -1,3 +1,4 @@
+#include "ubt_network.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_wifi.h"
@@ -114,4 +115,9 @@ void ubt_network_start(void)
 bool ubt_network_ready(void)
 {
     return bReady;
+}
+
+void ubt_network_sendmessage(char *pcMessage)
+{
+    esp_websocket_client_send_text(ws_client, pcMessage, strlen(pcMessage), portMAX_DELAY);
 }
