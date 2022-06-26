@@ -9,7 +9,7 @@ The buzzer relies on ESP32 with a button connected to it. The buzzer must connec
 
 ## Quickstart
 * Install ESP IDF SDK
-* activated SDK with `export.sh`
+* activate SDK with `export.sh`
 * use `idf.py build` to build the project
 * plug the buzzer to computer with an USB cable
 * use `idf.py flash` to reflash the buzzer
