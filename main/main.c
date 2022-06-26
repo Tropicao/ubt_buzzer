@@ -29,6 +29,23 @@ static void _send_button_pushed_message(void)
     free(pcMessage);
 }
 
+static void _send_identify_message(void)
+{
+    uint8_t u8Address[6] = {0};
+    char strAddress[13] = {0};
+    char *pcMessage = NULL;
+    esp_read_mac(u8Address, ESP_MAC_WIFI_STA);
+    snprintf(strAddress, 13, "%02x%02x%02x%02x%02x%02x",
+             u8Address[0], u8Address[1], u8Address[2], u8Address[3], u8Address[4], u8Address[5]);
+    cJSON *message = cJSON_CreateObject();
+    cJSON_AddStringToObject(message, "type", "identification");
+    cJSON_AddStringToObject(message, "id", strAddress);
+    pcMessage = cJSON_Print(message);
+    cJSON_free(message);
+    ubt_network_sendmessage(pcMessage);
+    free(pcMessage);
+}
+
 /**
  * @brief Main task in charge of managing buzzer behaviour
  * The main task listen on its task notifications with the following bits :
@@ -51,6 +68,7 @@ static void main_task(void *pvParameters)
     }
 
     ESP_LOGI(TAG, "Buzzer ready");
+    _send_identify_message();
     while (true)
     {
         if (xTaskNotifyWait(0, ULONG_MAX, &u32Notification, portMAX_DELAY) == pdFALSE)
