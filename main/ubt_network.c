@@ -34,9 +34,18 @@ static void _websocket_event_handler(void *handler_args, esp_event_base_t base, 
         break;
     case WEBSOCKET_EVENT_DATA:
         ESP_LOGI(TAG, "WEBSOCKET_EVENT_DATA");
-        ESP_LOGI(TAG, "Received opcode=%d", data->op_code);
-        ESP_LOGW(TAG, "Received=%.*s", data->data_len, (char *)data->data_ptr);
-        ESP_LOGW(TAG, "Total payload length=%d, data_len=%d, current payload offset=%d", data->payload_len, data->data_len, data->payload_offset);
+        switch(data->op_code)
+        {
+            case 0xA:
+                ESP_LOGD(TAG, "Received pong from server");
+                break;
+            case 0x1:
+                ESP_LOGI(TAG, "Received text data : %s", (char *)data->data_ptr);
+                break;
+            default:
+                ESP_LOGW(TAG, "Unprocessed websocket opcode %d", data->op_code);
+                break;
+        }
         break;
     case WEBSOCKET_EVENT_ERROR:
         ESP_LOGI(TAG, "WEBSOCKET_EVENT_ERROR");
