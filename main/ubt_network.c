@@ -45,7 +45,7 @@ static void _websocket_event_handler(void *handler_args, esp_event_base_t base, 
 
 static void _configure_websocket_client(void)
 {
-    const char uri[64] = {0};
+    char uri[64] = {0};
     snprintf(uri, 64, "ws://%s:%d", WS_SERVER_IP, WS_SERVER_PORT);
     const esp_websocket_client_config_t ws_cfg = {
         .uri = uri,
