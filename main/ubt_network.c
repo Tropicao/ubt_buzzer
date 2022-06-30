@@ -12,7 +12,7 @@
 #define AP_SSID "ubt_ap"
 #define AP_PASSWORD "ubt_ap14789"
 #define WS_SERVER_IP "192.168.1.1"
-#define WS_SERVER_PORT 8080
+#define WS_SERVER_PORT 6969
 
 esp_websocket_client_handle_t ws_client = NULL;
 
