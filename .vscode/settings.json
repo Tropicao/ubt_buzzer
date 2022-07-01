@@ -1,6 +1,8 @@
 {
     "cmake.configureOnOpen": true,
     "files.associations": {
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "common.h": "c",
+        "task.h": "c"
     }
 }
