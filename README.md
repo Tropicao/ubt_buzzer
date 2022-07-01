@@ -15,6 +15,9 @@ The buzzer relies on ESP32 with a button connected to it. The buzzer must connec
 * use `idf.py flash` to reflash the buzzer
 * advanced user : you can use `idf.py monitor` to manage both previous steps and get device logs
 
+## Buzzer network configuration
+The project has a default network configuration applied, which can be tuned if needed. You can edit the network configuration by executing `idf.py menuconfig`, then selecting the "Buzzer configuration" menu.
+
 ## IDE configuration
 The project has a basic Visual Studio code configuration, enable to Vscode "tasks" :
 * build

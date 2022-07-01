@@ -9,10 +9,6 @@
 #include "common.h"
 
 #define TAG "NWM"
-#define AP_SSID "ubt_ap"
-#define AP_PASSWORD "ubt_ap14789"
-#define WS_SERVER_IP "192.168.1.1"
-#define WS_SERVER_PORT 6969
 
 esp_websocket_client_handle_t ws_client = NULL;
 
@@ -56,7 +52,7 @@ static void _websocket_event_handler(void *handler_args, esp_event_base_t base, 
 static void _configure_websocket_client(void)
 {
     char uri[64] = {0};
-    snprintf(uri, 64, "ws://%s:%d", WS_SERVER_IP, WS_SERVER_PORT);
+    snprintf(uri, 64, "ws://%s:%d", CONFIG_UBT_WEBSOCKET_SERVER_ADDRESS, CONFIG_UBT_WEBSOCKET_SERVER_PORT);
     const esp_websocket_client_config_t ws_cfg = {
         .uri = uri,
         .reconnect_timeout_ms = 2000,
@@ -116,8 +112,8 @@ void ubt_network_start(void)
                                                         &instance_got_ip));
     wifi_config_t wifi_config = {
         .sta = {
-            .ssid = AP_SSID,
-            .password = AP_PASSWORD},
+            .ssid = CONFIG_UBT_AP_SSID,
+            .password = CONFIG_UBT_AP_PASSWORD},
     };
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));

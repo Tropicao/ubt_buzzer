@@ -1,0 +1,14 @@
+menu "Buzzer configuration"
+    config UBT_AP_SSID
+        string "SSID of access point on which buzzer must connect"
+        default "ubt_ap"
+    config UBT_AP_PASSWORD
+        string "Password of access point on which buzzer must connect"
+        default "ubt_ap14789"
+    config UBT_WEBSOCKET_SERVER_ADDRESS
+        string "Address of websocket server on which buzzer must connect"
+        default "192.168.1.1"
+    config UBT_WEBSOCKET_SERVER_PORT
+        int "Port of websocket server on which buzzer must connect"
+        default 6969
+endmenu
