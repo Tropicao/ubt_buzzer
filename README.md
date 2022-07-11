@@ -1,5 +1,7 @@
 # Ultimate Blind Test Buzzer
 
+![button](images/buzzer.jpg)
+
 ## Brief
 The Ultimate Blind Test Buzzer (ubt_buzzer) is a companion device for the Ultimate Blind Test. Its main goal
 is to provide a basic user interface to allow blind test players to compete.
