@@ -7,7 +7,7 @@
 #define TAG "BUTTON"
 #define BUTTON_GPIO GPIO_NUM_14
 #define BUTTON_PIN_MASK (1 << BUTTON_GPIO)
-#define DEBOUNCE_DELAY_MS (5 / portTICK_PERIOD_MS)
+#define DEBOUNCE_PERIOD_MS (1 / portTICK_PERIOD_MS)
 
 static TaskHandle_t _task = NULL;
 
@@ -19,7 +19,7 @@ static void _ButtonTask(void *pvArg) {
     if (buttonDebounce == 0xF000) {
       xTaskNotify(xAppTask, 1 << NOTIFICATION_BUTTON_EVENT, eSetBits);
     }
-    vTaskDelay(1);
+    vTaskDelay(DEBOUNCE_PERIOD_MS);
   }
 }
 
