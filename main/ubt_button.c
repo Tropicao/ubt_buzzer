@@ -31,11 +31,11 @@ static void _ButtonTask(void *pvArg) {
 void ubt_button_start() {
   esp_log_level_set(TAG, ESP_LOG_DEBUG);
   ESP_LOGI(TAG, "Configuring button");
-  xTaskCreate(&_ButtonTask, "button_task", 4096, NULL, 6, &_task);
   gpio_config_t config = {.pin_bit_mask = BUTTON_PIN_MASK,
                           .mode = GPIO_MODE_INPUT,
                           .pull_up_en = GPIO_PULLUP_ENABLE};
 
   ESP_ERROR_CHECK(gpio_config(&config));
+  xTaskCreate(&_ButtonTask, "button_task", 4096, NULL, 6, &_task);
   ESP_LOGI(TAG, "Button GPIO");
 }
