@@ -26,6 +26,18 @@ You can refer to the following components list :
 ## Buzzer sofware configuration
 * Install ESP IDF SDK
 * activate SDK with `export.sh`
+* the project comes with some configuration regarding the controller that
+  the buzzer is supposed to connect to:
+  - Access point SSID
+  - Access point password
+  - controller IP address
+  - controller port
+  If you are using the [default controller
+  configuration](https://github.com/Tropicao/ubt_controller), the default
+  values should be enough. However, if you want to change those, use
+  `idf.py menuconfig` and change the values under the "Buzzer
+  configuration" menu. Don't forget to use `idf.py save-defconfig`
+  afterward.
 * use `idf.py build` to build the project
 * plug the buzzer to computer with an USB cable
 * use `idf.py flash` to reflash the buzzer
