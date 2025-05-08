@@ -11,7 +11,7 @@
 #define GPIO_APPLY(x, y) CONCAT(x,y)
 #define BUTTON_GPIO GPIO_APPLY(GPIO_NUM_, CONFIG_UBT_BUTTON_GPIO)
 #define BUTTON_PIN_MASK (1 << CONFIG_UBT_BUTTON_GPIO)
-#define DEBOUNCE_PERIOD_MS (1 / portTICK_PERIOD_MS)
+#define DEBOUNCE_PERIOD_MS 1
 
 static TaskHandle_t _task = NULL;
 
@@ -23,7 +23,7 @@ static void _ButtonTask(void *pvArg) {
     if (buttonDebounce == 0xF000) {
       xTaskNotify(xAppTask, 1 << NOTIFICATION_BUTTON_EVENT, eSetBits);
     }
-    vTaskDelay(DEBOUNCE_PERIOD_MS);
+    vTaskDelay(pdMS_TO_TICKS(DEBOUNCE_PERIOD_MS));
   }
 }
 
