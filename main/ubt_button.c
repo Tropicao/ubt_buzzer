@@ -25,6 +25,7 @@ static void _ButtonTask(void *pvArg) {
     }
     vTaskDelay(pdMS_TO_TICKS(DEBOUNCE_PERIOD_MS));
   }
+  vTaskDelete(NULL);
 }
 
 void ubt_button_start() {
