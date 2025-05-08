@@ -11,4 +11,13 @@ menu "Buzzer configuration"
     config UBT_WEBSOCKET_SERVER_PORT
         int "Port of websocket server on which buzzer must connect"
         default 6969
+    config UBT_BUTTON_GPIO
+        int "GPIO on which the main button is connected"
+        default 2
+        help
+	  The provided GPIO will be automatically pulled up. Take care of
+	  setting a _GPIO_ number (ie a number relevant for the ESP32 chip)
+	  and not a _pin_ number (relevant for the module as a whole). For
+	  example, on Xiao ESP32C3, if you hook the button on pin D0, it is
+	  then GPIO2, so you need to set the button value to 2.
 endmenu

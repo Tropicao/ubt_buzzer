@@ -2,11 +2,15 @@
 #include "driver/gpio.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
+#include "freertos/projdefs.h"
 #include "freertos/task.h"
 
 #define TAG "BUTTON"
-#define BUTTON_GPIO GPIO_NUM_14
-#define BUTTON_PIN_MASK (1 << BUTTON_GPIO)
+#define NUM(x) x
+#define CONCAT(x,y) x ## y
+#define GPIO_APPLY(x, y) CONCAT(x,y)
+#define BUTTON_GPIO GPIO_APPLY(GPIO_NUM_, CONFIG_UBT_BUTTON_GPIO)
+#define BUTTON_PIN_MASK (1 << CONFIG_UBT_BUTTON_GPIO)
 #define DEBOUNCE_PERIOD_MS (1 / portTICK_PERIOD_MS)
 
 static TaskHandle_t _task = NULL;
