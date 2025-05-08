@@ -1,3 +1,4 @@
+#include <inttypes.h>
 #include "sdkconfig.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -63,7 +64,7 @@ static void main_task(void *pvParameters)
         {
             continue;
         }
-        ESP_LOGD(TAG, "New notification (%d)", u32Notification);
+        ESP_LOGD(TAG, "New notification (%"PRIu32")", u32Notification);
         if (u32Notification & (1 << NOTIFICATION_BUTTON_EVENT))
         {
             ESP_LOGI(TAG, "Button pushed, send notification to server");
