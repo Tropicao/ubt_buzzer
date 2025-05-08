@@ -37,5 +37,5 @@ void ubt_button_start() {
 
   ESP_ERROR_CHECK(gpio_config(&config));
   xTaskCreate(&_ButtonTask, "button_task", 4096, NULL, 6, &_task);
-  ESP_LOGI(TAG, "Button GPIO");
+  ESP_LOGI(TAG, "Button ready");
 }
