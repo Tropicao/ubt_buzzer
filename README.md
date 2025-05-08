@@ -38,6 +38,10 @@ You can refer to the following components list :
   `idf.py menuconfig` and change the values under the "Buzzer
   configuration" menu. Don't forget to use `idf.py save-defconfig`
   afterward.
+* configure your target: there are multiple variants of esp32, and so you
+  must build the software for your specific variant. The default is
+  `esp32`. You can list available targets with `idf.py --list-targets`, and
+  set the target with `idf.py set-target <target>`
 * use `idf.py build` to build the project
 * plug the buzzer to computer with an USB cable
 * use `idf.py flash` to reflash the buzzer
