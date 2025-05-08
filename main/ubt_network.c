@@ -26,17 +26,16 @@ static void _websocket_event_handler(void *handler_args, esp_event_base_t base, 
         xTaskNotify(xAppTask, 1 << NOTIFICATION_NETWORK_DOWN, eSetBits);
         break;
     case WEBSOCKET_EVENT_DATA:
-        ESP_LOGI(TAG, "WEBSOCKET_EVENT_DATA");
         switch (data->op_code)
         {
         case 0x9:
-            ESP_LOGD(TAG, "Received ping from server");
+            ESP_LOGI(TAG, "RX: ping");
             break;
         case 0xA:
-            ESP_LOGD(TAG, "Received pong from server");
+            ESP_LOGI(TAG, "RX: pong");
             break;
         case 0x1:
-            ESP_LOGI(TAG, "Received text data : %s", (char *)data->data_ptr);
+            ESP_LOGI(TAG, "RX: data (%s)", (char *)data->data_ptr);
             break;
         default:
             ESP_LOGW(TAG, "Unprocessed websocket opcode %d", data->op_code);
