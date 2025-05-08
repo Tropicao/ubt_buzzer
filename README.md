@@ -50,8 +50,3 @@ You can refer to the following components list :
 ## Buzzer network configuration
 The project has a default network configuration applied, which can be tuned if needed. You can edit the network configuration by executing `idf.py menuconfig`, then selecting the "Buzzer configuration" menu.
 
-## IDE configuration
-The project has a basic Visual Studio code configuration, enable to Vscode "tasks" :
-* build
-* flash
-Moreover, Intellisense is able to resolve ESP IDF symbols if your ESP IDF SK is at the same level than the project. You can edit ESP IDF path in `.vscode/c_cpp_properties.json` if you want to set another path.
