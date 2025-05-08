@@ -57,7 +57,6 @@ static void main_task(void *pvParameters)
 {
     uint32_t u32Notification = 0;
     ESP_LOGI(TAG, "Buzzer ready");
-    _send_identify_message();
     while (true)
     {
         if (xTaskNotifyWait(0, ULONG_MAX, &u32Notification, portMAX_DELAY) == pdFALSE)
