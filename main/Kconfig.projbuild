@@ -7,7 +7,7 @@ menu "Buzzer configuration"
         default "ubt_ap14789"
     config UBT_WEBSOCKET_SERVER_ADDRESS
         string "Address of websocket server on which buzzer must connect"
-        default "192.168.1.1"
+        default "192.168.66.1"
     config UBT_WEBSOCKET_SERVER_PORT
         int "Port of websocket server on which buzzer must connect"
         default 6969
