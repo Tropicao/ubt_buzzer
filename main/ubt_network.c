@@ -57,7 +57,12 @@ static void _configure_websocket_client(void)
         .uri = uri,
         .reconnect_timeout_ms = 2000,
         .network_timeout_ms = 5000};
+    ESP_LOGI(TAG, "Connecting to %s", uri);
     ws_client = esp_websocket_client_init(&ws_cfg);
+    if (!ws_client) {
+	    ESP_LOGE(TAG, "Can not initialize websocket client");
+	    return;
+    }
     esp_websocket_register_events(ws_client, WEBSOCKET_EVENT_ANY, _websocket_event_handler, NULL);
     esp_websocket_client_start(ws_client);
 }
